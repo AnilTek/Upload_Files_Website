@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+
+{% block title %}
+    Login an account
+{% endblock title %}
+
+{% block styles %}
+   {% load static %}
+   <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock styles %}
+
+{% block content %}
+<div class="form-container">
+    <div class="form-box">
+        <h1>Kurum Giriş</h1>
+        <form action="/users/login/" method="post">
+            {% csrf_token %}
+            
+            
+            <div class="form-group">
+                <label for="id_username">Kurum İsmi:</label>
+                {{ form.username }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_password">Şifre:</label>
+                {{ form.password }}
+            </div>
+
+            {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+            {% endif %}
+
+            <button type="submit">Giriş Yap</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
